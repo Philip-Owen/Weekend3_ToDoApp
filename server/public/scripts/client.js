@@ -23,15 +23,23 @@ function postTodo() {
         category: $('select option:selected').data().id
     }
     
-    $.ajax({
-        method: 'POST',
-        url: '/todoList',
-        data: todo,
-        success: function(response) {
-            console.log('POST response', response);
-            getTodos();
-        }
-    });
+    // input validation
+    if (todo.category == undefined || todo.task.length == 0) {
+        $('#warningDiv').removeClass('hide');
+    } else {
+        $.ajax({
+            method: 'POST',
+            url: '/todoList',
+            data: todo,
+            success: function(response) {
+                console.log('POST response', response);
+                getTodos();
+                $('#warningDiv').addClass('hide');
+                $('#todoInput').val('');
+                $('#todoCategory').val('Category');
+            }
+        });
+    }
 }
 
 function getTodos() {
@@ -76,7 +84,7 @@ function displayToDo(todo) {
 }
 
 function updateCompleted() {
-    let taskID = $(this).parents('tr').data();
+    let taskID = $(this).parents('tr').data().id;
     console.log(taskID);
     
     $.ajax({

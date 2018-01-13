@@ -12,12 +12,15 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="main">
+        <div id="main">
             <div class="row">
                 <div id="title" class="col-md-offset-2 col-md-8 text-center">
                     <h1>todo List</h1>
                 </div>
                 <div id="inputDiv" class="col-xs-6 col-md-5">
+                    <div id="warningDiv" class="alert alert-warning hide">
+                        <strong>Error!</strong> Please enter a ToDo and select a category before submitting.
+                    </div>
                     <label>Add ToDo:</label>
                     <input type="text" id="todoInput" placeholder="Enter To Do">
                     <select id="todoCategory">
