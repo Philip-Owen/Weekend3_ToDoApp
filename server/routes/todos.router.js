@@ -34,4 +34,20 @@ router.post('/', (req,res) =>{
         });
 });
 
+// PUT routes
+
+router.put('/completeUpdate/:id', (req,res) =>{
+    let queryText = `UPDATE todos SET completed = 'Complete' WHERE id = $1`
+
+    pool.query(queryText, [req.params.id])
+        .then((results) =>{
+            console.log('query results: ', results);        
+            res.send(results);
+        })
+        .catch((err) =>{
+            console.log('error making update query:', err);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;
