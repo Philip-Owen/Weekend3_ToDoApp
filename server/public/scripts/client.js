@@ -3,7 +3,8 @@ console.log('JavaScript sourced');
 $(document).ready(function() {
    console.log('jQuery Sourced');
     getTodos();
-    $('#submitToDo').on('click', postTodo)
+    $('#submitToDo').on('click', postTodo);
+    $('#todosList').on('click', '.btn-success', updateCompleted);
 });
 
 function postTodo() {
@@ -45,14 +46,33 @@ function displayToDo(todo) {
     let date = todo.task_date
     date = date.split('T');
     date = date[0];
-    
+
     let $newToDo = $('<tr>');
     $newToDo.append(`<td>${date}</td>`);
     $newToDo.append(`<td>${todo.task}</td>`);
-    $newToDo.append('<td><button class="btn btn-success">Mark Complete</button></td>');
+
+    if (todo.completed == 'Not Complete') {
+        $newToDo.append('<td><button class="btn btn-success">Mark Complete</button></td>');
+    } else {
+        $newToDo.append('<td>Complete</td>');
+    }
+
     $newToDo.append('<td><button class="btn btn-danger">Delete</button></td>');
     
     $newToDo.data(todo);
 
     $('#todosList').append($newToDo);
+}
+
+function updateCompleted() {
+    let taskID = $(this).parents('tr').data().id;
+
+    $.ajax({
+        method: 'PUT',
+        url: '/todoList/completeUpdate/' + taskID,
+        success: function(response) {
+            console.log('PUT response', response);
+            getTodos();
+        }
+    });
 }
