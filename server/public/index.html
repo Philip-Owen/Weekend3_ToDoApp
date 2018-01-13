@@ -7,36 +7,48 @@
     <link rel="stylesheet" href="styles/main.css"/>
     <script src="vendors/jquery.min.js"></script>
     <script src="vendors/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
     <script src="scripts/client.js"></script>
 </head>
 <body>
     <div class="container-fluid">
         <div class="main">
-            <div id="dateViwer">
-                <h1 id="date"></h1>
+            <div class="row">
+                <div id="title" class="col-md-offset-2 col-md-8 text-center">
+                    <h1>todo List</h1>
+                </div>
+                <div id="inputDiv" class="col-xs-6 col-md-5">
+                    <label>Add ToDo:</label>
+                    <input type="text" id="todoInput" placeholder="Enter To Do">
+                    <select id="todoCategory">
+                        <option>Category</option>
+                    </select>
+                    <button id="submitToDo" class="btn btn-primary">Submit ToDo</button>
+                </div>
+                <div id="dateViwer" class="col-xs-6 col-md-offset-2 col-md-5 text-right">
+                    <div>
+                        <h2 id="date"></h1>
+                    </div>
+                </div>
             </div>
-            <label>Add ToDo:</label>
-            <input type="text" id="todoInput" placeholder="Enter To Do">
-            <button id="submitToDo">Submit</button>
         </div>
         <div class="row">
-            <div class="col-sm-offset-1 col-sm-10">
-                <div id="todosDiv" class="table-responsive">
-                    <div class="table-responsive">          
-                        <table class="table table-hover">
-                            <thead>
+            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                <div class="table-responsive">          
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Task</th>
-                                <th>Completed</th>
-                                <th>Delete</th>
+                                <th class="ten">Date</th>
+                                <th class="sixty">Task</th>
+                                <th class="ten">Category</th>
+                                <th class="fifteen">Completed</th>
+                                <th class="five">Remove</th>
                             </tr>
-                            </thead>
-                            <tbody id="todosList">
-                                <!-- Left Blank -->
-                            </tbody>
-                        </table>
-                    </div>
+                        </thead>
+                        <tbody id="todosList">
+                            <!-- left blank -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

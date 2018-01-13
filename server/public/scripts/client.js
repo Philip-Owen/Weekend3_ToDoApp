@@ -1,7 +1,15 @@
 console.log('JavaScript sourced');
 
 $(document).ready(function() {
-   console.log('jQuery Sourced');
+    console.log('jQuery Sourced');
+    // appends todays date to the page
+    let today = new Date;
+    let day = today.getDate();
+    let month = today.getMonth() + 1
+    let year = today.getFullYear()
+    $('#date').text('Today\'s Date: ' + month + '/' + day + '/' + year)
+
+    getCategories();
     getTodos();
     $('#submitToDo').on('click', postTodo);
     $('#todosList').on('click', '.btn-success', updateCompleted);
@@ -10,9 +18,9 @@ $(document).ready(function() {
 
 function postTodo() {
     let todo = {
-        task: $('#todoInput').val()
+        task: $('#todoInput').val(),
+        category: $('select option:selected').data().id
     }
-    console.log(todo);
     
     $.ajax({
         method: 'POST',
@@ -49,16 +57,17 @@ function displayToDo(todo) {
     date = date[0];
 
     let $newToDo = $('<tr>');
-    $newToDo.append(`<td>${date}</td>`);
-    $newToDo.append(`<td>${todo.task}</td>`);
+    $newToDo.append(`<td class="ten">${date}</td>`);
+    $newToDo.append(`<td class="sixty">${todo.task}</td>`);
+    $newToDo.append(`<td class="ten">${todo.category}</td>`);
 
     if (todo.completed == 'Not Complete') {
-        $newToDo.append('<td><button class="btn btn-success">Mark Complete</button></td>');
+        $newToDo.append('<td class="fifteen"><button class="btn btn-success complete">Mark Complete</button></td>');
     } else {
-        $newToDo.append('<td>Complete</td>');
+        $newToDo.append('<td class="fifteen">Complete</td>');
     }
 
-    $newToDo.append('<td><button class="btn btn-danger">Delete</button></td>');
+    $newToDo.append('<td class="five"><button class="btn btn-danger">Delete</button></td>');
     
     $newToDo.data(todo);
 
@@ -66,16 +75,17 @@ function displayToDo(todo) {
 }
 
 function updateCompleted() {
-    let taskID = $(this).parents('tr').data().id;
-
-    $.ajax({
-        method: 'PUT',
-        url: '/todoList/completeUpdate/' + taskID,
-        success: function(response) {
-            console.log('PUT response', response);
-            getTodos();
-        }
-    });
+    let taskID = $(this).parents('tr').data();
+    console.log(taskID);
+    
+    // $.ajax({
+    //     method: 'PUT',
+    //     url: '/todoList/completeUpdate/' + taskID,
+    //     success: function(response) {
+    //         console.log('PUT response', response);
+    //         getTodos();
+    //     }
+    // });
 }
 
 function deleteTodo() {
@@ -89,4 +99,24 @@ function deleteTodo() {
             getTodos();
         }
     });
+}
+
+function getCategories() {
+    $.ajax({
+        method: 'GET',
+        url: '/todoList/categories',
+        success: function(response) {
+            console.log(response);
+            categoriesToList(response);
+        }
+    });
+}
+
+function categoriesToList(categories) {
+    for (let i = 0; i < categories.length; i++) {
+        let $option = $('<option>');
+        $option.append(categories[i].category);
+        $option.data(categories[i]);
+        $('#todoCategory').append($option);
+    }
 }

@@ -5,7 +5,24 @@ const pool = require('../modules/pool');
 // GET routes
 
 router.get('/', (req,res) =>{
-    let queryText = 'SELECT * FROM todos ORDER BY id';
+    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, todos.category_id 
+                     FROM todos 
+                     JOIN categories ON todos.category_id = categories.id 
+                     ORDER BY todos.id`;
+
+    pool.query(queryText)
+        .then((results) =>{
+            // console.log('query results: ', results);        
+            res.send(results.rows);
+        })
+        .catch((err) =>{
+            console.log('error making select query:', err);
+            res.sendStatus(500);
+        });
+});
+
+router.get('/categories', (req,res) =>{
+    let queryText = 'SELECT * FROM categories ORDER BY id';
 
     pool.query(queryText)
         .then((results) =>{
@@ -21,9 +38,9 @@ router.get('/', (req,res) =>{
 // POST routes
 
 router.post('/', (req,res) =>{
-    let queryText = 'INSERT INTO todos(task) VALUES ($1)';
+    let queryText = 'INSERT INTO todos(task, category_id) VALUES ($1, $2)';
 
-    pool.query(queryText, [req.body.task])
+    pool.query(queryText, [req.body.task, req.body.category])
         .then((results) =>{
             // console.log('query results: ', results);        
             res.send(results.rows);
