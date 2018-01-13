@@ -5,6 +5,7 @@ $(document).ready(function() {
     getTodos();
     $('#submitToDo').on('click', postTodo);
     $('#todosList').on('click', '.btn-success', updateCompleted);
+    $('#todosList').on('click', '.btn-danger', deleteTodo);
 });
 
 function postTodo() {
@@ -72,6 +73,19 @@ function updateCompleted() {
         url: '/todoList/completeUpdate/' + taskID,
         success: function(response) {
             console.log('PUT response', response);
+            getTodos();
+        }
+    });
+}
+
+function deleteTodo() {
+    let taskID = $(this).parents('tr').data().id;
+
+    $.ajax({
+        method: 'DELETE',
+        url: '/todoList/deleteTodo/' + taskID,
+        success: function(response) {
+            console.log(response);
             getTodos();
         }
     });
