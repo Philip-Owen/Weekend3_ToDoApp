@@ -1,8 +1,9 @@
 #Todos
 
 ##Server
-- [ ] add and configure pool.js
-- [ ] add and configure todo router
+- [X] add and configure pool.js
+- [X] add and configure todo router
+- [ ] configure route on server.js to todo router
 - [ ] create todo router get/post
 
 ##Client
