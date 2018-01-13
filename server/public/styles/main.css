@@ -82,6 +82,10 @@ select {
     visibility: hidden;
 }
 
+.modal-content {
+    color: black;
+}
+
 #dateViwer {
     position: absolute;
     bottom: 0;
@@ -111,4 +115,23 @@ select {
     height: 250px;
     position: relative;
     min-height: 150px;
+}
+
+#deleteHeader {
+    background-color: #d9534f;
+    color: white;
+}
+
+
+#confirmHeader {
+    background-color: #5cb85c;
+    color: white;
+}
+
+#confirmText {
+    font-size: 17px;
+}
+
+#completeText {
+    font-size: 17px;
 }

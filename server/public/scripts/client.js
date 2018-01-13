@@ -14,7 +14,7 @@ $(document).ready(function() {
     $('#submitToDo').on('click', postTodo);
     $('#todosList').on('click', '.btn-success', updateCompleted);
     $('#todosList').on('click', '.btn-danger', confirmRemove);
-    $('#removeConfirmed').on('click', removeTodo)
+    $('#removeConfirmed').on('click', removeTodo);
 }); // end document ready
 
 
@@ -82,7 +82,7 @@ function displayToDo(todo) {
         $newToDo.append('<td class="fifteen">Complete</td>');
     }
 
-    $newToDo.append('<td class="five"><button class="btn btn-danger">Delete</button></td>');
+    $newToDo.append('<td class="five"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></td>');
     $newToDo.data(todo);
     $('#todosList').append($newToDo);
 } // end displayToDo(todo)
@@ -91,7 +91,8 @@ function displayToDo(todo) {
 // begin updateCompleted()
 function updateCompleted() {
     let taskID = $(this).parents('tr').data().id;
-    
+    $('#completeModal').modal('show');
+
     $.ajax({
         method: 'PUT',
         url: '/todoList/completeUpdate/' + taskID,
