@@ -12,4 +12,4 @@
 - [X] add ajax get
 - [ ] add ajax post
 - [ ] configure input fields to send todo's to server
-- [ ] create function to append info to DOM
+- [X] create function to append info to DOM
