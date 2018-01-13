@@ -1,5 +1,8 @@
 #Todos
 
+##Database
+- [X] Add categories table and link it to todos table
+
 ##Server
 - [X] add and configure pool.js
 - [X] add and configure todo router
@@ -18,4 +21,4 @@
 - [X] create function to append info to DOM
 
 ##Front End
-- [ ] add additional styling
+- [X] add additional styling

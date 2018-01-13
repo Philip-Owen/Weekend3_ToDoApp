@@ -13,7 +13,8 @@ $(document).ready(function() {
     getTodos();
     $('#submitToDo').on('click', postTodo);
     $('#todosList').on('click', '.btn-success', updateCompleted);
-    $('#todosList').on('click', '.btn-danger', deleteTodo);
+    $('#todosList').on('click', '.btn-danger', confirmRemove);
+    $('#removeConfirmed').on('click', removeTodo)
 });
 
 function postTodo() {
@@ -78,28 +79,17 @@ function updateCompleted() {
     let taskID = $(this).parents('tr').data();
     console.log(taskID);
     
-    // $.ajax({
-    //     method: 'PUT',
-    //     url: '/todoList/completeUpdate/' + taskID,
-    //     success: function(response) {
-    //         console.log('PUT response', response);
-    //         getTodos();
-    //     }
-    // });
-}
-
-function deleteTodo() {
-    let taskID = $(this).parents('tr').data().id;
-
     $.ajax({
-        method: 'DELETE',
-        url: '/todoList/deleteTodo/' + taskID,
+        method: 'PUT',
+        url: '/todoList/completeUpdate/' + taskID,
         success: function(response) {
-            console.log(response);
+            console.log('PUT response', response);
             getTodos();
         }
     });
 }
+
+
 
 function getCategories() {
     $.ajax({
@@ -120,3 +110,23 @@ function categoriesToList(categories) {
         $('#todoCategory').append($option);
     }
 }
+
+function confirmRemove() {
+    var id = $(this).parents('tr').data('id');
+    $('#deleteModal').data('id', id).modal('show');
+}
+
+function removeTodo() {
+    let taskID = $('#deleteModal').data('id');
+    $('#deleteModal').data('id', taskID).modal('show');
+
+    $.ajax({
+        method: 'DELETE',
+        url: '/todoList/deleteTodo/' + taskID,
+        success: function(response) {
+            console.log(response);
+            getTodos();
+        }
+    });
+}
+
