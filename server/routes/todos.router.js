@@ -18,4 +18,20 @@ router.get('/', (req,res) =>{
         });
 });
 
+// POST routes
+
+router.post('/', (req,res) =>{
+    let queryText = 'INSERT INTO todos(task) VALUES ($1)';
+
+    pool.query(queryText, [req.body.task])
+        .then((results) =>{
+            console.log('query results: ', results);        
+            res.send(results.rows);
+        })
+        .catch((err) =>{
+            console.log('error making insert query:', err);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;

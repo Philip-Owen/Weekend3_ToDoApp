@@ -18,7 +18,7 @@ function postTodo() {
         data: todo,
         success: function(response) {
             console.log('POST response', response);
-            
+            getTodos();
         }
     });
 }

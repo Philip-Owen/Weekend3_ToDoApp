@@ -1,9 +1,10 @@
 // Dependencies
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const todos = require('./routes/todos.router');
 
-
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('server/public'));
 
 // routes
