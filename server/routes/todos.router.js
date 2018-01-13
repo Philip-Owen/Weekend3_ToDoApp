@@ -9,8 +9,8 @@ router.get('/', (req,res) =>{
 
     pool.query(queryText)
         .then((results) =>{
-            console.log('query results: ', result);        
-            res.send(result.rows);
+            console.log('query results: ', results);        
+            res.send(results.rows);
         })
         .catch((err) =>{
             console.log('error making select query:', err);

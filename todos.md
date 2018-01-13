@@ -9,6 +9,7 @@
 - [ ] create todo router put route
 
 ##Client
+- [X] add ajax get
+- [ ] add ajax post
 - [ ] configure input fields to send todo's to server
-- [ ] add ajax get and post
 - [ ] create function to append info to DOM
