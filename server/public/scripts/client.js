@@ -3,15 +3,32 @@ console.log('JavaScript sourced');
 $(document).ready(function() {
    console.log('jQuery Sourced');
     getTodos();
+    $('#submitToDo').on('click', postTodo)
 });
 
+function postTodo() {
+    let todo = {
+        task: $('#todoInput').val()
+    }
+    console.log(todo);
+    
+    $.ajax({
+        method: 'POST',
+        url: '/todoList',
+        data: todo,
+        success: function(response) {
+            console.log('POST response', response);
+            
+        }
+    });
+}
 
 function getTodos() {
     $.ajax({
         method: 'GET',
         url: '/todoList',
         success: function(response) {
-            console.log(response);
+            console.log('GET response', response);
             displayAllToDos(response);
         }
     });
@@ -23,7 +40,6 @@ function displayAllToDos(todos) {
         displayToDo(todos[i])
     }
 }
-
 
 function displayToDo(todo) {
     let date = todo.task_date
