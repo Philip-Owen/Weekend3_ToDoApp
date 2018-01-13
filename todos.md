@@ -13,6 +13,9 @@
 - [X] add ajax get
 - [X] add ajax post
 - [X] add ajax put
-- [ ] add ajax delete
+- [X] add ajax delete
 - [X] configure input fields to send todo's to server
 - [X] create function to append info to DOM
+
+##Front End
+- [ ] add additional styling
