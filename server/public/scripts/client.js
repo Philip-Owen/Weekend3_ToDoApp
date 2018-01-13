@@ -1,13 +1,13 @@
-console.log('JavaScript sourced');
 
+
+// begin document ready
 $(document).ready(function() {
-    console.log('jQuery Sourced');
     // appends todays date to the page
     let today = new Date;
-    let day = today.getDate();
-    let month = today.getMonth() + 1
-    let year = today.getFullYear()
-    $('#date').text('Today\'s Date: ' + month + '/' + day + '/' + year)
+    let date = 'Today\'s Date: ' + (today.getMonth() + 1);
+    date += '/' + today.getDate();
+    date += '/' + today.getFullYear();
+    $('#date').text(date)
 
     getCategories();
     getTodos();
@@ -15,8 +15,10 @@ $(document).ready(function() {
     $('#todosList').on('click', '.btn-success', updateCompleted);
     $('#todosList').on('click', '.btn-danger', confirmRemove);
     $('#removeConfirmed').on('click', removeTodo)
-});
+}); // end document ready
 
+
+// begin postTodo()
 function postTodo() {
     let todo = {
         task: $('#todoInput').val(),
@@ -32,7 +34,6 @@ function postTodo() {
             url: '/todoList',
             data: todo,
             success: function(response) {
-                console.log('POST response', response);
                 getTodos();
                 $('#warningDiv').addClass('hide');
                 $('#todoInput').val('');
@@ -40,26 +41,31 @@ function postTodo() {
             }
         });
     }
-}
+} // end postTodo()
 
+
+// begin getTodos()
 function getTodos() {
     $.ajax({
         method: 'GET',
         url: '/todoList',
         success: function(response) {
-            console.log('GET response', response);
             displayAllToDos(response);
         }
     });
-}
+} // end getTodos()
 
+
+// begin displayAllToDos(todos)
 function displayAllToDos(todos) {
     $('#todosList').empty();
     for (let i = 0; i < todos.length; i++) {
         displayToDo(todos[i])
     }
-}
+} // end displayAllToDos(todos)
 
+
+// begin displayToDo(todo)
 function displayToDo(todo) {
     let date = todo.task_date
     date = date.split('T');
@@ -77,39 +83,38 @@ function displayToDo(todo) {
     }
 
     $newToDo.append('<td class="five"><button class="btn btn-danger">Delete</button></td>');
-    
     $newToDo.data(todo);
-
     $('#todosList').append($newToDo);
-}
+} // end displayToDo(todo)
 
+
+// begin updateCompleted()
 function updateCompleted() {
     let taskID = $(this).parents('tr').data().id;
-    console.log(taskID);
     
     $.ajax({
         method: 'PUT',
         url: '/todoList/completeUpdate/' + taskID,
         success: function(response) {
-            console.log('PUT response', response);
             getTodos();
         }
     });
-}
+} // end updateCompleted()
 
 
-
+// begin getCategories()
 function getCategories() {
     $.ajax({
         method: 'GET',
         url: '/todoList/categories',
         success: function(response) {
-            console.log(response);
             categoriesToList(response);
         }
     });
-}
+} // end getCategories()
 
+
+// begin categoriesToList(categories)
 function categoriesToList(categories) {
     for (let i = 0; i < categories.length; i++) {
         let $option = $('<option>');
@@ -117,13 +122,17 @@ function categoriesToList(categories) {
         $option.data(categories[i]);
         $('#todoCategory').append($option);
     }
-}
+} // end categoriesToList(categories)
 
+
+// begin confirmRemove()
 function confirmRemove() {
     var id = $(this).parents('tr').data('id');
     $('#deleteModal').data('id', id).modal('show');
-}
+} // end confirmRemove()
 
+
+// begin removeTodo()
 function removeTodo() {
     let taskID = $('#deleteModal').data('id');
     $('#deleteModal').data('id', taskID).modal('show');
@@ -132,9 +141,8 @@ function removeTodo() {
         method: 'DELETE',
         url: '/todoList/deleteTodo/' + taskID,
         success: function(response) {
-            console.log(response);
             getTodos();
         }
     });
-}
+} // end removeTodo()
 
