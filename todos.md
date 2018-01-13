@@ -7,7 +7,7 @@
 - [X] create todo router get route
 - [X] create todo router post route
 - [X] create todo router put route
-- [ ] create todo router delete route
+- [X] create todo router delete route
 
 ##Client
 - [X] add ajax get

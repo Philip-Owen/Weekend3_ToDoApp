@@ -9,7 +9,7 @@ router.get('/', (req,res) =>{
 
     pool.query(queryText)
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
@@ -25,7 +25,7 @@ router.post('/', (req,res) =>{
 
     pool.query(queryText, [req.body.task])
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
@@ -41,7 +41,7 @@ router.put('/completeUpdate/:id', (req,res) =>{
 
     pool.query(queryText, [req.params.id])
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results);
         })
         .catch((err) =>{
@@ -49,5 +49,23 @@ router.put('/completeUpdate/:id', (req,res) =>{
             res.sendStatus(500);
         });
 });
+
+
+// DELETE routes
+
+router.delete('/deleteTodo/:id', (req,res) => {
+    let queryText = 'DELETE FROM todos WHERE id = $1';
+
+    pool.query(queryText, [req.params.id])
+        .then((results) =>{
+            console.log('query results: ', results);        
+            res.send(results);
+        })
+        .catch((err) =>{
+            console.log('error making delete query:', err);
+            res.sendStatus(500);
+        });
+});
+
 
 module.exports = router;
