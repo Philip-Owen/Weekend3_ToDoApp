@@ -3,7 +3,7 @@
 ##Server
 - [X] add and configure pool.js
 - [X] add and configure todo router
-- [ ] configure route on server.js to todo router
+- [X] configure route on server.js to todo router
 - [ ] create todo router get/post
 
 ##Client
