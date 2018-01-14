@@ -31,6 +31,18 @@ select:focus {
 
 }
 
+table {
+    font-size: 20px;
+}
+
+select {
+    background-color: #02C4D9;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100px;
+}
+
 .container-fluid {
     padding: 0;
 }
@@ -53,8 +65,8 @@ select:focus {
     text-align: center;
 }
 
-.sixty {
-    width: 60%;
+.fifty {
+    width: 50%;
 }
 
 .fifteen {
@@ -96,6 +108,24 @@ select:focus {
 
 .confirmText {
     font-size: 17px;
+}
+
+.High {
+    color: #d9534f;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.Medium {
+    color: #E89159;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.Low {
+    color: #7DE894;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 #dateViwer {
@@ -152,10 +182,3 @@ select:focus {
     right: 0;
 }  
 
-#todoCategory {
-    background-color: #02C4D9;
-    border: none;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 100px;
-}

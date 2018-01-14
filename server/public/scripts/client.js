@@ -9,6 +9,7 @@ $(document).ready(function() {
     $('#date').text(date)
 
     getCategories();
+    getPriorities();
     getTodos();
     $('#submitToDo').on('click', postTodo);
     $('#todosList').on('click', '.btn-success', updateCompleted);
@@ -23,7 +24,8 @@ $(document).ready(function() {
 function postTodo() {
     let todo = {
         task: $('#todoInput').val(),
-        category: $('select option:selected').data().id
+        category: $('#todoCategory option:selected').data().id,
+        priority: $('#todoPriority option:selected').data().id
     }
     
     // input validation
@@ -52,6 +54,8 @@ function getTodos() {
         method: 'GET',
         url: '/todoList',
         success: function(response) {
+            console.log(response);
+            
             displayAllToDos(response);
         }
     });
@@ -75,7 +79,8 @@ function displayToDo(todo) {
 
     let $newToDo = $('<tr>');
     $newToDo.append(`<td class="ten">${date}</td>`);
-    $newToDo.append(`<td class="sixty">${todo.task}</td>`);
+    $newToDo.append(`<td class="fifty">${todo.task}</td>`);
+    $newToDo.append(`<td class="ten ${todo.priorities}">${todo.priorities}</td>`);
     $newToDo.append(`<td class="ten">${todo.category}</td>`);
 
     if (todo.completed == 'Not Complete') {
@@ -116,6 +121,19 @@ function getCategories() {
     });
 } // end getCategories()
 
+function getPriorities() {
+    $.ajax({
+        method: 'GET',
+        url: '/todoList/priorities',
+        success: function(response) {
+            console.log(response);
+            
+            prioritiesToList(response);
+        }
+    });
+} // end getCategories()
+
+
 
 // begin categoriesToList(categories)
 function categoriesToList(categories) {
@@ -126,6 +144,17 @@ function categoriesToList(categories) {
         $('#todoCategory').append($option);
     }
 } // end categoriesToList(categories)
+
+
+// begin prioritiesToList(priorities)
+function prioritiesToList(priorities) {
+    for (let i = 0; i < priorities.length; i++) {
+        let $option = $('<option>');
+        $option.append(priorities[i].priorities);
+        $option.data(priorities[i]);
+        $('#todoPriority').append($option);
+    }
+} // end prioritiesToList(priorities)
 
 
 // begin confirmRemove()

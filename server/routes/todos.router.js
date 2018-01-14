@@ -6,9 +6,10 @@ const pool = require('../modules/pool');
 
 router.get('/', (req,res) =>{
 
-    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, todos.category_id 
+    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, priority.priorities,todos.category_id, priority.id 
                     FROM todos 
-                    JOIN categories ON todos.category_id = categories.id 
+                    JOIN categories ON todos.category_id = categories.id
+                    JOIN priority ON todos.priority_id = priority.id 
                     ORDER BY todos.completed DESC, todos.task_date DESC, todos.id DESC`;
     pool.query(queryText)
         .then((results) =>{
@@ -35,12 +36,26 @@ router.get('/categories', (req,res) =>{
         });
 });
 
+router.get('/priorities', (req,res) =>{
+    let queryText = 'SELECT * FROM priority ORDER BY id';
+
+    pool.query(queryText)
+        .then((results) =>{
+            console.log('query results: ', results);        
+            res.send(results.rows);
+        })
+        .catch((err) =>{
+            console.log('error making select query:', err);
+            res.sendStatus(500);
+        });
+});
+
 // POST routes
 
 router.post('/', (req,res) =>{
-    let queryText = 'INSERT INTO todos(task, category_id) VALUES ($1, $2)';
+    let queryText = 'INSERT INTO todos(task, category_id, priority_id) VALUES ($1, $2, $3)';
 
-    pool.query(queryText, [req.body.task, req.body.category])
+    pool.query(queryText, [req.body.task, req.body.category, req.body.priority])
         .then((results) =>{
             console.log('query results: ', results);        
             res.send(results.rows);
