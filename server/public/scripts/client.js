@@ -3,10 +3,7 @@
 $(document).ready(function() {
     // appends todays date to the page
     let today = new Date;
-    let date = 'Today\'s Date: ' + (today.getMonth() + 1);
-    date += '/' + today.getDate();
-    date += '/' + today.getFullYear();
-    $('#date').text(date)
+    $('#date').text('Today\'s Date: ' + today.toDateString());
 
     getCategories();
     getPriorities();
@@ -25,9 +22,12 @@ function postTodo() {
     let todo = {
         task: $('#todoInput').val(),
         category: $('#todoCategory option:selected').data().id,
-        priority: $('#todoPriority option:selected').data().id
+        priority: $('#todoPriority option:selected').data().id,
+        dueDate: $('#dueDate').val()
     }
-    
+
+    console.log(todo);    
+
     // input validation
     if (todo.category == undefined || todo.task.length == 0) {
         $('#warningDiv').removeClass('hide');
@@ -73,12 +73,13 @@ function displayAllToDos(todos) {
 
 // begin displayToDo(todo)
 function displayToDo(todo) {
-    let date = todo.task_date
-    date = date.split('T');
-    date = date[0];
+    let date = formatDate(todo.task_date);
+    let dueDate = formatDate(todo.due_date);
+    let overDue = overDueTasks(dueDate);
 
     let $newToDo = $('<tr>');
     $newToDo.append(`<td class="ten">${date}</td>`);
+    $newToDo.append(`<td class="ten ${overDue}">${dueDate}</td>`);
     $newToDo.append(`<td class="fifty">${todo.task}</td>`);
     $newToDo.append(`<td class="ten ${todo.priorities}">${todo.priorities}</td>`);
     $newToDo.append(`<td class="ten">${todo.category}</td>`);
@@ -93,6 +94,36 @@ function displayToDo(todo) {
     $newToDo.data(todo);
     $('#todosList').append($newToDo);
 } // end displayToDo(todo)
+
+function formatDate(todoDate) {
+    let date;   
+    if (todoDate == null) {
+        date = ''
+    } else {
+        date = todoDate
+        date = date.split('T');
+        date = date[0];
+    }
+    return date;
+}
+
+function overDueTasks(todo) {
+    console.log(todo);
+    
+    let today = new Date;
+    today = today.toISOString();
+    today = today.split('T');
+    today = today[0];
+
+    console.log();
+    
+    let taskDue;
+    if (todo <= today) {
+        taskDue = 'overDue';
+    }
+
+    return taskDue
+}
 
 
 // begin updateCompleted()

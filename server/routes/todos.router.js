@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 
 router.get('/', (req,res) =>{
 
-    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, priority.priorities
+    let queryText = `SELECT todos.id, todos.task_date, todos.due_date, todos.task, todos.completed, categories.category, priority.priorities
                     FROM todos 
                     JOIN categories ON todos.category_id = categories.id
                     JOIN priority ON todos.priority_id = priority.id 
@@ -14,11 +14,11 @@ router.get('/', (req,res) =>{
     
     pool.query(queryText)
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
-            console.log('error making select query:', err);
+            // console.log('error making select query:', err);
             res.sendStatus(500);
         });
 });
@@ -28,11 +28,11 @@ router.get('/categories', (req,res) =>{
 
     pool.query(queryText)
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
-            console.log('error making select query:', err);
+            // console.log('error making select query:', err);
             res.sendStatus(500);
         });
 });
@@ -42,11 +42,11 @@ router.get('/priorities', (req,res) =>{
 
     pool.query(queryText)
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
-            console.log('error making select query:', err);
+            // console.log('error making select query:', err);
             res.sendStatus(500);
         });
 });
@@ -54,17 +54,34 @@ router.get('/priorities', (req,res) =>{
 // POST routes
 
 router.post('/', (req,res) =>{
-    let queryText = 'INSERT INTO todos(task, category_id, priority_id) VALUES ($1, $2, $3)';
-
-    pool.query(queryText, [req.body.task, req.body.category, req.body.priority])
+    console.log('due date', req.body.dueDate.length);
+    let queryText
+    if (req.body.dueDate.length == 0) {
+        queryText= 'INSERT INTO todos(task, due_date, category_id, priority_id) VALUES ($1, NULL, $2, $3)';
+        
+        pool.query(queryText, [req.body.task,req.body.category, req.body.priority])
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
             console.log('error making insert query:', err);
             res.sendStatus(500);
         });
+    } else {
+        queryText= 'INSERT INTO todos(task, due_date, category_id, priority_id) VALUES ($1, $2, $3, $4)';
+        
+        pool.query(queryText, [req.body.task, req.body.dueDate, req.body.category, req.body.priority])
+        .then((results) =>{
+            // console.log('query results: ', results);        
+            res.send(results.rows);
+        })
+        .catch((err) =>{
+            console.log('error making insert query:', err);
+            res.sendStatus(500);
+        });
+    }
+
 });
 
 // PUT routes
@@ -74,11 +91,11 @@ router.put('/completeUpdate/:id', (req,res) =>{
 
     pool.query(queryText, [req.params.id])
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results);
         })
         .catch((err) =>{
-            console.log('error making update query:', err);
+            // console.log('error making update query:', err);
             res.sendStatus(500);
         });
 });
@@ -91,11 +108,11 @@ router.delete('/deleteTodo/:id', (req,res) => {
 
     pool.query(queryText, [req.params.id])
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results);
         })
         .catch((err) =>{
-            console.log('error making delete query:', err);
+            // console.log('error making delete query:', err);
             res.sendStatus(500);
         });
 });
@@ -105,11 +122,11 @@ router.delete('/deleteAllTodos', (req,res) => {
 
     pool.query(queryText)
         .then((results) =>{
-            console.log('query results: ', results);        
+            // console.log('query results: ', results);        
             res.send(results);
         })
         .catch((err) =>{
-            console.log('error making delete query:', err);
+            // console.log('error making delete query:', err);
             res.sendStatus(500);
         });
 });

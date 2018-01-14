@@ -4,6 +4,7 @@
 CREATE TABLE todos (
 	id SERIAL PRIMARY KEY,
 	task_date DATE DEFAULT now(),
+	due_date DATE,
 	task VARCHAR(255) NOT NULL,
 	completed VARCHAR(12) DEFAULT 'Not Complete',
 	category_id INT REFERENCES "categories",
