@@ -5,14 +5,14 @@ const pool = require('../modules/pool');
 // GET routes
 
 router.get('/', (req,res) =>{
-    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, todos.category_id 
-                     FROM todos 
-                     JOIN categories ON todos.category_id = categories.id 
-                     ORDER BY todos.id`;
 
+    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, todos.category_id 
+                    FROM todos 
+                    JOIN categories ON todos.category_id = categories.id 
+                    ORDER BY todos.completed DESC, todos.task_date DESC, todos.id DESC`;
     pool.query(queryText)
         .then((results) =>{
-            // console.log('query results: ', results);        
+            console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
@@ -26,7 +26,7 @@ router.get('/categories', (req,res) =>{
 
     pool.query(queryText)
         .then((results) =>{
-            // console.log('query results: ', results);        
+            console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
@@ -42,7 +42,7 @@ router.post('/', (req,res) =>{
 
     pool.query(queryText, [req.body.task, req.body.category])
         .then((results) =>{
-            // console.log('query results: ', results);        
+            console.log('query results: ', results);        
             res.send(results.rows);
         })
         .catch((err) =>{
@@ -58,7 +58,7 @@ router.put('/completeUpdate/:id', (req,res) =>{
 
     pool.query(queryText, [req.params.id])
         .then((results) =>{
-            // console.log('query results: ', results);        
+            console.log('query results: ', results);        
             res.send(results);
         })
         .catch((err) =>{
@@ -74,6 +74,20 @@ router.delete('/deleteTodo/:id', (req,res) => {
     let queryText = 'DELETE FROM todos WHERE id = $1';
 
     pool.query(queryText, [req.params.id])
+        .then((results) =>{
+            console.log('query results: ', results);        
+            res.send(results);
+        })
+        .catch((err) =>{
+            console.log('error making delete query:', err);
+            res.sendStatus(500);
+        });
+});
+
+router.delete('/deleteAllTodos', (req,res) => {
+    let queryText = 'DELETE FROM todos';
+
+    pool.query(queryText)
         .then((results) =>{
             console.log('query results: ', results);        
             res.send(results);

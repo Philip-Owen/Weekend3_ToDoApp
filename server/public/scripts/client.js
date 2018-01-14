@@ -1,5 +1,4 @@
 
-
 // begin document ready
 $(document).ready(function() {
     // appends todays date to the page
@@ -15,6 +14,8 @@ $(document).ready(function() {
     $('#todosList').on('click', '.btn-success', updateCompleted);
     $('#todosList').on('click', '.btn-danger', confirmRemove);
     $('#removeConfirmed').on('click', removeTodo);
+    $('#removeAllTodos').on('click', confirmRemoveAll)
+    $('#removeAllConfirmed').on('click', removeAllTodos)
 }); // end document ready
 
 
@@ -46,6 +47,7 @@ function postTodo() {
 
 // begin getTodos()
 function getTodos() {
+
     $.ajax({
         method: 'GET',
         url: '/todoList',
@@ -129,6 +131,8 @@ function categoriesToList(categories) {
 // begin confirmRemove()
 function confirmRemove() {
     var id = $(this).parents('tr').data('id');
+    console.log($(this).parents('tr').data('id'));
+    
     $('#deleteModal').data('id', id).modal('show');
 } // end confirmRemove()
 
@@ -147,3 +151,18 @@ function removeTodo() {
     });
 } // end removeTodo()
 
+
+function confirmRemoveAll() {    
+    $('#deleteAllModal').modal('show');
+} // end confirmRemove()
+
+
+function removeAllTodos() {
+    $.ajax({
+        method: 'DELETE',
+        url: '/todoList/deleteAllTodos/',
+        success: function(response) {
+            getTodos();
+        }
+    });
+}

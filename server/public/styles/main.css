@@ -31,13 +31,6 @@ select:focus {
 
 }
 
-select {
-    background-color: #02C4D9;
-    color: #F6EDD3;
-}
-
-
-
 .container-fluid {
     padding: 0;
 }
@@ -86,6 +79,25 @@ select {
     color: black;
 }
 
+.glyphicon-triangle-bottom:hover {
+    color: gray;
+}
+
+.deleteHeader {
+    background-color: #d9534f;
+    color: white;
+}
+
+
+.confirmHeader {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.confirmText {
+    font-size: 17px;
+}
+
 #dateViwer {
     position: absolute;
     bottom: 0;
@@ -107,31 +119,43 @@ select {
 }
 
 #title {
+    margin-top: 50px;
     font-size: 40px;
 }
 
 #main {
     background-color: #02C4D9;
-    height: 250px;
+    height: 350px;
     position: relative;
     min-height: 150px;
 }
 
-#deleteHeader {
-    background-color: #d9534f;
-    color: white;
-}
-
-
-#confirmHeader {
-    background-color: #5cb85c;
-    color: white;
-}
-
-#confirmText {
-    font-size: 17px;
-}
-
 #completeText {
     font-size: 17px;
+}
+
+#sort {
+    margin-top: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#todosDiv {
+    margin-top: 50px;
+}
+
+#removeTodos {
+    margin-top: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}  
+
+#todoCategory {
+    background-color: #02C4D9;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100px;
 }

@@ -15,7 +15,7 @@
         <div id="main">
             <div class="row">
                 <div id="title" class="col-md-offset-2 col-md-8 text-center">
-                    <h1>todo List</h1>
+                    <h1><span class="glyphicon-align-justify glyphicon glyphicon-list"></span> todosList</h1>
                 </div>
                 <div id="inputDiv" class="col-xs-6 col-md-5">
                     <div id="warningDiv" class="alert alert-warning hide">
@@ -37,14 +37,17 @@
         </div>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                <div class="table-responsive">          
+                <div id="todosDiv" class="table-responsive">
+                    <div id="removeTodos">
+                        <button id="removeAllTodos" class="btn btn-danger">Remove All Todos</button>       
+                    </div>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="ten">Date<span class="glyphicon glyphicon-triangle-bottom"></span></th>
+                                <th class="ten">Date</th>
                                 <th class="sixty">Task</th>
-                                <th class="ten">Category<span class="glyphicon glyphicon-triangle-bottom"></span></th>
-                                <th class="fifteen">Completed<span class="glyphicon glyphicon-triangle-bottom"></span></th>
+                                <th class="ten">Category</th>
+                                <th class="fifteen">Completed</th>
                                 <th class="five">Remove</th>
                             </tr>
                         </thead>
@@ -59,12 +62,12 @@
         <div class="modal fade" id="deleteModal" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <div id="deleteHeader" class="modal-header">
+                    <div class="modal-header deleteHeader">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Delete Task</h4>
                     </div>
                     <div class="modal-body">
-                        <p id="confirmText">Are you sure you want to remove this ToDo?</p>
+                        <p class="confirmText">Are you sure you want to remove this ToDo?</p>
                     </div>
                     <div class="modal-footer">
                         <button id="removeConfirmed" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
@@ -73,6 +76,23 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="deleteAllModal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header deleteHeader">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete Task</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="confirmText">This will remove all todos. Are you sure you want to continue?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="removeAllConfirmed" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <!-- COMPLETE -->
         <div class="modal fade" id="completeModal" role="dialog">
             <div class="modal-dialog modal-sm">
