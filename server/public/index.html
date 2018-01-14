@@ -15,35 +15,47 @@
         <div id="main">
             <div class="row">
                 <div id="title" class="col-md-offset-2 col-md-8 text-center">
-                    <h1><span class="glyphicon-align-justify glyphicon glyphicon-list"></span> todosList</h1>
+                    <p><span class="glyphicon-align-justify glyphicon glyphicon-list"></span> todosList</p>
                 </div>
-                <div id="inputDiv" class="col-xs-6 col-md-5">
+            </div>
+            <div class="row">
+                <div id="inputDiv" class="col-md-offset-1 col-md-10 text-center">
                     <div id="warningDiv" class="alert alert-warning hide">
                         <strong>Error!</strong> Please enter a ToDo and select a category before submitting.
                     </div>
-                    <label>Add ToDo:</label>
-                    <input type="text" id="todoInput" placeholder="Enter To Do">
-                    <select id="todoCategory">
-                        <option>Category</option>
-                    </select>
-                    <select id="todoPriority">
-                    </select>
-                    <button id="submitToDo" class="btn btn-primary">Submit ToDo</button>
-                </div>
-                <div id="dateViwer" class="col-xs-6 col-md-offset-2 col-md-5 text-right">
-                    <div>
-                        <h2 id="date"></h1>
+                    <div class="inputSpacing">
+                        <label>Add ToDo:</label>
+                        <input type="text" id="todoInput" placeholder="Enter To Do">
                     </div>
+                    <div class="inputSpacing">
+                        <label id="categoryLable" for="#todoCategory">Category:</label>
+                        <select id="todoCategory">
+                            <option>Category</option>
+                        </select>
+                        <label for="#todoPriority">Priority</label>
+                        <select id="todoPriority">
+                        </select>
+                        <button id="submitToDo" class="btn btn-primary">Submit</button>
+                    </div>   
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container-fluid">
         <div class="row">
+            <div class="col-xs-6">
+                <div id="dateViwer">
+                    <p id="date"></p>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div id="removeTodos">
+                    <button id="removeAllTodos" class="btn btn-danger">Remove All Todos</button>       
+                </div>
+            </div>
             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
                 <div id="todosDiv" class="table-responsive">
-                    <div id="removeTodos">
-                        <button id="removeAllTodos" class="btn btn-danger">Remove All Todos</button>       
-                    </div>
-                    <table class="table">
+                  <table class="table">
                         <thead>
                             <tr>
                                 <th class="ten">Date</th>

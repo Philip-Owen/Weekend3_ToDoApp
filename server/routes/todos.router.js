@@ -6,11 +6,12 @@ const pool = require('../modules/pool');
 
 router.get('/', (req,res) =>{
 
-    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, priority.priorities,todos.category_id, priority.id 
+    let queryText = `SELECT todos.id, todos.task_date, todos.task, todos.completed, categories.category, priority.priorities
                     FROM todos 
                     JOIN categories ON todos.category_id = categories.id
                     JOIN priority ON todos.priority_id = priority.id 
-                    ORDER BY todos.completed DESC, todos.task_date DESC, todos.id DESC`;
+                    ORDER BY todos.completed DESC, todos.task_date DESC, todos.id DESC`
+    
     pool.query(queryText)
         .then((results) =>{
             console.log('query results: ', results);        

@@ -5,30 +5,19 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-h1 {
-    color: #F6EDD3;
-    font-size: 100px;
-    font-weight: 800;
-}
-
-h2 {
-    color: #F6EDD3;
-}
-
 input[type=text] {
     border: none;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid #F6EDD3;
     background-color: #02C4D9;
     color: #F6EDD3;
 }
 
 input[type=text]:focus {
-    outline: none;
+    outline: #F6EDD3
 }
 
 select:focus {
     outline: none;
-
 }
 
 table {
@@ -37,10 +26,10 @@ table {
 
 select {
     background-color: #02C4D9;
-    border: none;
+    border: 1px solid #F6EDD3;
     margin-left: 10px;
     margin-right: 10px;
-    width: 100px;
+    width: 13%;
 }
 
 .container-fluid {
@@ -76,7 +65,9 @@ select {
 
 .alert {
     color: #F6EDD3;
-    width: 500px;
+    padding: 0;
+    width: 50%;
+    margin-left: 25%;
 }
 
 .alert-warning {
@@ -128,34 +119,55 @@ select {
     font-size: 20px;
 }
 
-#dateViwer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.glyphicon-plus-sign {
+
+    font-size: 30px;
+    color: #337ab7;
 }
 
-#inputDiv {
-    margin-left: 10%;
-    margin-bottom: 10px;
-    width: 40%;
+.glyphicon-plus-sign:hover {
+    color: #286090;
+    border-color: #204d74;
+}
+
+.glyphicon-plus-sign:active {
+    color: #204d74;
+    border-color: #122b40;
+}
+
+.inputSpacing {
+    margin: 10px;
+}
+
+.col-xs-6 {
+    height: 30px;
+}
+
+#dateViwer {
+    margin-left: 5%;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
 }
 
+#inputDiv {
+    margin-top: 30px;
+    font-size: 17px;
+}
+
 #todoInput {
-    margin-left: 5px;
-    width: 35%;
+    width: 45%;
 }
 
 #title {
-    margin-top: 50px;
-    font-size: 40px;
+    margin-top: 30px;
+    font-size: 110px;
+    font-weight: bold;
 }
 
 #main {
     background-color: #02C4D9;
-    height: 350px;
+    height: 450px;
     position: relative;
     min-height: 150px;
 }
@@ -172,13 +184,60 @@ select {
 }
 
 #todosDiv {
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 #removeTodos {
-    margin-top: 15px;
+    margin-right: 5%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-left: 10px;
     position: absolute;
     top: 0;
     right: 0;
 }  
 
+#testing {
+    display: inline-block;
+}
+
+#date {
+    padding-top: 20px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    table {
+        vertical-align: top;
+        max-width: 100%;
+    }
+    
+    #main {
+        height: 350px;
+    }
+
+    #title {
+        margin-top: 10px;
+        font-size: 60px;
+        font-weight: bold;
+    }
+
+    select {
+        background-color: #02C4D9;
+        border: 1px solid #F6EDD3;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 100%;
+    }
+
+    #todoInput {
+
+        width: 100%; 
+    }
+
+    #inputDiv {
+        margin-top: 10px;
+    }
+}
