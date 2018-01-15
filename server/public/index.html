@@ -19,22 +19,22 @@
                 </div>
             </div>
             <div class="row">
-                <div id="inputDiv" class="col-md-offset-1 col-md-10 text-center">
+                <div id="inputDiv" class="col-md-offset-2 col-md-8 text-center">
                     <div id="warningDiv" class="alert alert-warning hide">
                         <strong>Error!</strong> Please enter a ToDo and select a category before submitting.
                     </div>
                     <div class="inputSpacing">
-                        <label>Add ToDo:</label>
-                        <input type="text" id="todoInput" placeholder="Enter To Do">
-                    </div>
-                    <div class="inputSpacing">
+                        <div class="inputSpacing">
+                            <input type="text" id="todoInput" placeholder="Enter ToDo Here...">
+                        </div>
                         <label id="categoryLable" for="#todoCategory">Category:</label>
                         <select id="todoCategory">
                             <option>Category</option>
                         </select>
-                        <label for="#todoPriority">Priority</label>
+                        <label for="#todoPriority">Priority:</label>
                         <select id="todoPriority">
                         </select>
+                        <label for="#dueDate">Due Date:</label>
                         <input id="dueDate" type="date">
                         <button id="submitToDo" class="btn btn-primary">Submit</button>
                     </div>   
