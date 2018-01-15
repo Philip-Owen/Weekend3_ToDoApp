@@ -137,6 +137,10 @@ select {
     font-weight: bold;
 }
 
+.glyphicon-ok {
+    color: #7DE894;
+}
+
 #dateViwer {
     margin-left: 5%;
     position: absolute;

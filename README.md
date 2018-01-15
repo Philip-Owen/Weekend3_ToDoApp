@@ -17,11 +17,13 @@ A To Do List application that keeps track of things you need to do!
 ### Completed Features
 
 - [x] Add to do's
-- [x] Add priorities to to do's
-- [x] Add categories to to do's
-- [x] Add due dates to to do's
+- [x] Add priorities to to do's.
+- [x] Add categories to to do's.
+- [x] Add due dates to to do's.
+- [x] Tasks over due have the date in alert.
+- [x] Tasks over due that are completed no longer show in alert.
 
 ### Next Steps
 
-- [ ] Color due dates when they are past due
+
 - [ ] Reformat input fields as a pop up
