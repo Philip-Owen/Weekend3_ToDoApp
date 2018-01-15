@@ -24,9 +24,7 @@ function postTodo() {
         category: $('#todoCategory option:selected').data().id,
         priority: $('#todoPriority option:selected').data().id,
         dueDate: $('#dueDate').val()
-    }
-
-    console.log(todo);    
+    }  
 
     // input validation
     if (todo.category == undefined || todo.task.length == 0) {
@@ -55,8 +53,6 @@ function getTodos() {
         method: 'GET',
         url: '/todoList',
         success: function(response) {
-            console.log(response);
-            
             displayAllToDos(response);
         }
     });
@@ -167,17 +163,16 @@ function getCategories() {
     });
 } // end getCategories()
 
+// begin getPriorities()
 function getPriorities() {
     $.ajax({
         method: 'GET',
         url: '/todoList/priorities',
         success: function(response) {
-            console.log(response);
-            
             prioritiesToList(response);
         }
     });
-} // end getCategories()
+} // end getPriorities()
 
 
 
@@ -226,12 +221,12 @@ function removeTodo() {
     });
 } // end removeTodo()
 
-
+// begin confirmRemoveAll()
 function confirmRemoveAll() {    
     $('#deleteAllModal').modal('show');
-} // end confirmRemove()
+} // end confirmRemoveAll()
 
-
+// begin removeAllTodos()
 function removeAllTodos() {
     $.ajax({
         method: 'DELETE',
@@ -240,4 +235,4 @@ function removeAllTodos() {
             getTodos();
         }
     });
-}
+} // end removeAllTodos()
