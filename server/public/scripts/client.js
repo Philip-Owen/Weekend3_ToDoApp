@@ -41,6 +41,7 @@ function postTodo() {
                 $('#warningDiv').addClass('hide');
                 $('#todoInput').val('');
                 $('#todoCategory').val('Category');
+                $('#dueDate').val('');
             }
         });
     }
