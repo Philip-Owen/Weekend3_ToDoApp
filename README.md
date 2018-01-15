@@ -12,7 +12,7 @@ A To Do List application that keeps track of things you need to do!
 - Express.js
 - PostgreSQL
 
-![screenshot](images/todoList.png)
+![screenshot](images/todosList.png)
 
 ### Completed Features
 
