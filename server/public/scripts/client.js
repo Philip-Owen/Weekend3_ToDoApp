@@ -12,8 +12,13 @@ $(document).ready(function() {
     $('#todosList').on('click', '.btn-success', updateCompleted);
     $('#todosList').on('click', '.btn-danger', confirmRemove);
     $('#removeConfirmed').on('click', removeTodo);
-    $('#removeAllTodos').on('click', confirmRemoveAll)
-    $('#removeAllConfirmed').on('click', removeAllTodos)
+    $('#removeAllTodos').on('click', confirmRemoveAll);
+    $('#removeAllConfirmed').on('click', removeAllTodos);
+    $('#orderDate').on('click', orderDate);
+    $('#orderDueDate').on('click', orderDueDate);
+    $('#orderPriority').on('click', orderPriority);
+    $('#orderCategory').on('click', orderCategory);
+
 }); // end document ready
 
 
@@ -58,6 +63,50 @@ function getTodos() {
         }
     });
 } // end getTodos()
+
+// begin orderDate()
+function orderDate() {
+    $.ajax({
+        method: 'GET',
+        url: '/order/orderDate',
+        success: function(response) {
+            displayAllToDos(response);
+        }
+    });
+} // end orderDate()
+
+// begin orderDueDate()
+function orderDueDate() {
+    $.ajax({
+        method: 'GET',
+        url: '/order/orderDueDate',
+        success: function(response) {
+            displayAllToDos(response);
+        }
+    });
+} // end orderDueDate()
+
+// begin orderPriority()
+function orderPriority() {
+    $.ajax({
+        method: 'GET',
+        url: '/order/orderPriority',
+        success: function(response) {
+            displayAllToDos(response);
+        }
+    });
+} // end orderPriority()
+
+// begin orderCategory()
+function orderCategory() {
+    $.ajax({
+        method: 'GET',
+        url: '/order/orderCategory',
+        success: function(response) {
+            displayAllToDos(response);
+        }
+    });
+} // end orderCategory()
 
 
 // begin displayAllToDos(todos)
@@ -116,9 +165,6 @@ function overDueTasks(todo) {
     let taskDue;
     let today = new Date;
     today = today.toISOString();
-    
-    console.log(today);
-    console.log(todo);
     
     if (today > todo) {
         taskDue = 'overDue';

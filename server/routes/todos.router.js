@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
+let orderDueDate = false;
+let orderPriority = false;
+
 // GET routes
 
 router.get('/', (req,res) =>{
@@ -18,7 +21,7 @@ router.get('/', (req,res) =>{
             res.send(results.rows);
         })
         .catch((err) =>{
-            // console.log('error making select query:', err);
+            console.log('error making select query:', err);
             res.sendStatus(500);
         });
 });
@@ -32,7 +35,7 @@ router.get('/categories', (req,res) =>{
             res.send(results.rows);
         })
         .catch((err) =>{
-            // console.log('error making select query:', err);
+            console.log('error making select query:', err);
             res.sendStatus(500);
         });
 });
@@ -46,7 +49,7 @@ router.get('/priorities', (req,res) =>{
             res.send(results.rows);
         })
         .catch((err) =>{
-            // console.log('error making select query:', err);
+            console.log('error making select query:', err);
             res.sendStatus(500);
         });
 });
@@ -54,7 +57,6 @@ router.get('/priorities', (req,res) =>{
 // POST routes
 
 router.post('/', (req,res) =>{
-    console.log('due date', req.body.dueDate.length);
     let queryText
     if (req.body.dueDate.length == 0) {
         queryText= 'INSERT INTO todos(task, due_date, category_id, priority_id) VALUES ($1, NULL, $2, $3)';
@@ -95,7 +97,7 @@ router.put('/completeUpdate/:id', (req,res) =>{
             res.send(results);
         })
         .catch((err) =>{
-            // console.log('error making update query:', err);
+            console.log('error making update query:', err);
             res.sendStatus(500);
         });
 });
@@ -112,7 +114,7 @@ router.delete('/deleteTodo/:id', (req,res) => {
             res.send(results);
         })
         .catch((err) =>{
-            // console.log('error making delete query:', err);
+            console.log('error making delete query:', err);
             res.sendStatus(500);
         });
 });
@@ -126,7 +128,7 @@ router.delete('/deleteAllTodos', (req,res) => {
             res.send(results);
         })
         .catch((err) =>{
-            // console.log('error making delete query:', err);
+            console.log('error making delete query:', err);
             res.sendStatus(500);
         });
 });
