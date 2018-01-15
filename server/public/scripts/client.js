@@ -75,11 +75,10 @@ function displayAllToDos(todos) {
 function displayToDo(todo) {
     let date = formatDate(todo.task_date);
     let dueDate = formatDate(todo.due_date);
-    let overDue = overDueTasks(dueDate);
 
     let $newToDo = $('<tr>');
     $newToDo.append(`<td class="ten">${date}</td>`);
-    $newToDo.append(`<td class="ten ${overDue}">${dueDate}</td>`);
+    $newToDo.append(`<td class="ten">${dueDate}</td>`);
     $newToDo.append(`<td class="fifty">${todo.task}</td>`);
     $newToDo.append(`<td class="ten ${todo.priorities}">${todo.priorities}</td>`);
     $newToDo.append(`<td class="ten">${todo.category}</td>`);
@@ -105,24 +104,6 @@ function formatDate(todoDate) {
         date = date[0];
     }
     return date;
-}
-
-function overDueTasks(todo) {
-    console.log(todo);
-    
-    let today = new Date;
-    today = today.toISOString();
-    today = today.split('T');
-    today = today[0];
-
-    console.log();
-    
-    let taskDue;
-    if (todo <= today) {
-        taskDue = 'overDue';
-    }
-
-    return taskDue
 }
 
 
