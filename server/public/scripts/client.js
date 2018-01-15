@@ -75,10 +75,11 @@ function displayAllToDos(todos) {
 function displayToDo(todo) {
     let date = formatDate(todo.task_date);
     let dueDate = formatDate(todo.due_date);
+    let overDue = overDueTasks(dueDate)
 
     let $newToDo = $('<tr>');
     $newToDo.append(`<td class="ten">${date}</td>`);
-    $newToDo.append(`<td class="ten">${dueDate}</td>`);
+    $newToDo.append(`<td class="ten ${overDue}">${dueDate}</td>`);
     $newToDo.append(`<td class="fifty">${todo.task}</td>`);
     $newToDo.append(`<td class="ten ${todo.priorities}">${todo.priorities}</td>`);
     $newToDo.append(`<td class="ten">${todo.category}</td>`);
@@ -105,6 +106,36 @@ function formatDate(todoDate) {
     }
     return date;
 }
+
+// begin overDueTasks(todo)
+function overDueTasks(todo) {
+    console.log(todo);
+    let taskDue;
+    let today = new Date;
+    today = today.toISOString();
+    today = today.split('T');
+    today = today[0];
+    today = today.split('-')
+
+    let checkdue = todo.split('-')
+    console.log(today);
+    console.log(checkdue);
+    
+    if (today[0] > checkdue[0]) {
+        taskDue = 'overDue';
+    } else {
+        if (today[1] > checkdue[1]) {
+            taskDue = 'overDue';
+        } else {
+            if (today[2] >= checkdue[2]) {
+                taskDue = 'overDue';
+            } else {
+                askDue = ''
+            }
+        }
+    }
+    return taskDue;
+} // end overDueTasks(todo)
 
 
 // begin updateCompleted()
